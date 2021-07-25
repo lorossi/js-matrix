@@ -1,8 +1,8 @@
 class Sketch extends Engine {
   preload() {
-    this._chains_num = 150; // number of falling chains of letters
-    this._duration = 600; // animation duration
-    this._recording = false;
+    this._chains_num = 200; // number of falling chains of letters
+    this._duration = 900; // animation duration
+    this._recording = true;
   }
 
   setup() {
