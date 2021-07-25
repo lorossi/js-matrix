@@ -1,0 +1,68 @@
+@font-face {
+  font-family: Roboto;
+  src: url(fonts/Roboto-Light.ttf);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+body {
+ font-family: Roboto;
+ font-size: var(--text-size);
+ background-color: var(--background-color);
+ color: var(--text-color);
+}
+
+a {
+  user-select: none;
+}
+
+a:visited, a:active {
+  color: var(--visited-link-color);
+}
+
+.container {
+  width: 100vw;
+  height: 100vh;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#sketch {
+  height: 95vh;
+  width: 95vh;
+
+  touch-action: none;
+}
+
+.footer {
+  position: absolute;
+  width: 100vw;
+  bottom: 1vh;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer * {
+  padding-left: 2vw;
+  padding-right: 2vw;
+}
+
+@media only screen and (max-width: 600px) {
+  #sketch {
+    height: 95vw;
+    width: 95vw;
+  }
+
+  .footer {
+    justify-content: space-around;
+  }
+}
