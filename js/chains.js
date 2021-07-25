@@ -1,47 +1,54 @@
 class Chain {
-  constructor(container_size) {
-    this._container_size = container_size; // size of the canvas
-    this._length = 4 + Math.floor(Math.random() * 8); // number of letters in a chain
-    this._offset = Math.floor(Math.random() * 60); // "time" offset, so not every letter changes at the same time
-
-    this.reset();
-
-    this._y = Math.random() * this._container_size;  // y position, so that not everything starts on top
+  constructor(canvas_width, canvas_height, max_duration) {
+    this._canvas_width = canvas_width;
+    this._canvas_height = canvas_height;
+    this._max_duration = max_duration;
+    this._max_statuses = 10;
+    this._reset();
+    this._generateStatuses();
   }
 
-  reset() {
-    const z = Math.random(); // depth
-    this._scl = z * 30 + 5; // letter size
-    this._speed = z * 2 + 0.5; // falling speed
+  _reset() {
+    // number of letters in a chain
+    this._length = 4 + Math.floor(Math.random() * 8);
+    // "time" offset, so not every letter changes at the same time
+    this._offset = Math.random();
 
-    this._x = Math.random() * this._container_size;
-    this._y = -this._scl * this._length; // starts above the screen
+    this._duration = this._max_duration / Math.floor(Math.random() * 3 + 1);
+    this._scl = Math.random() * 20 + 10; // letter size
 
-    this._frame_update = Math.floor(Math.random() * 30 + 30); // frequency of the update
-    this._dead = false;
+    // random x and y starting positions
+    this._x = Math.random() * this._canvas_width;
+    this._start_y = Math.random() * this._canvas_height;
+    // period of the status change
+    this._status_period = this._max_duration / this._max_statuses;
+    // current status
+    this._status_counter = 0;
   }
 
-  generate() {
-    // generate the letters (kanji)
-    this._letters = new Array(this._length)
-      .fill(null)
-      .map(() => String.fromCodePoint(0x3041 + Math.floor(Math.random() * 63)));
+  _generateStatuses() {
+    this._statuses = [];
+    for (let i = 0; i < this._max_statuses; i++) {
+      this._statuses.push(new Array(this._length));
+      for (let j = 0; j < this._length; j++) {
+        this._statuses[i][j] = String.fromCodePoint(0x3041 + Math.floor(Math.random() * 63));
+      }
+    }
   }
 
   move(frame_count) {
+    const percent = (frame_count % this._duration) / this._duration;
     // move down the chain
-    this._y += this._speed;
-    if (this._y > this._container_size) {
-      this._dead = true;
-    } else if ((frame_count + this._offset) % this._frame_update == 0) {
-      this.generate();
-    }
+    this._current_y = this._start_y + this._canvas_height * percent;
+    while (this._current_y > this._canvas_height) this._current_y -= this._canvas_height;
+    // select current status
+    this._status_counter = Math.floor(percent * this._max_statuses + this._offset) % this._max_statuses;
   }
 
   show(ctx) {
     // rounding for better performances
     const x = Math.floor(this._x);
-    const y = Math.floor(this._y);
+    const y = Math.floor(this._current_y);
     const scl = Math.floor(this._scl);
 
     ctx.save();
@@ -51,15 +58,10 @@ class Chain {
     ctx.textBaseline = "top";
     ctx.fillStyle = "#2bee15";
 
-    this._letters.forEach((l, i) => {
+    this._statuses[this._status_counter].forEach((l, i) => {
       ctx.fillText(l, 0, scl * i);
     });
 
     ctx.restore();
-  }
-
-  // getter
-  get dead() {
-    return this._dead;
   }
 }
