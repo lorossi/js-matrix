@@ -1,18 +1,26 @@
-/*
-  HTML canvas sketch. GitHub repo and some basic documentation: https://github.com/lorossi/empty-html5-canvas-project
-  Made by Lorenzo Rossi. Website and contacts: https://lorenzoros.si/
-*/
-
 class Sketch extends Engine {
   preload() {
-    // ran once. Ideally, this has never to be called again
+    this._chains_num = 100; // number of falling chains of letters
   }
 
   setup() {
-    // ran once. This can be called multiple times
+    this._chains = [];
+    for (let i = 0; i < this._chains_num; i++) {
+      const nc = new Chain(this.width);
+      nc.generate();
+      this._chains.push(nc);
+    }
   }
 
   draw() {
-    // looping continuously at a set framerate
+    this.ctx.save();
+    this.background("#151515");
+    this._chains.forEach((c) => {
+      c.show(this.ctx,);
+      c.move(this.frameCount);
+
+      if (c.dead) c.reset(); // reset fallen chains
+    });
+    this.ctx.restore();
   }
 }
