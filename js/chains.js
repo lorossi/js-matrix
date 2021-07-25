@@ -2,7 +2,6 @@ class Chain {
   constructor(canvas_size, total_duration) {
     this._canvas_size = canvas_size;
     this._total_duration = total_duration;
-    this._total_statuses = 10;
     this._reset();
     this._generateStatuses();
   }
@@ -19,8 +18,10 @@ class Chain {
     // random x and y starting positions
     this._x = Math.random() * this._canvas_size; // x coordinate never changes
     this._start_y = Math.random() * this._canvas_size;
+    // total number of statuses
+    this._total_statuses = Math.floor(Math.random() * 4 + 8);
     // period of the status change
-    this._status_period = this._total_duration / this._total_statuses;
+    this._status_period = this._total_duration / this._total_statuses / 4;
     // current status
     this._status_counter = 0;
   }

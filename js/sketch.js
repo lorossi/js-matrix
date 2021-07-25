@@ -1,6 +1,6 @@
 class Sketch extends Engine {
   preload() {
-    this._chains_num = 100; // number of falling chains of letters
+    this._chains_num = 150; // number of falling chains of letters
     this._duration = 600; // animation duration
     this._border = 100;
   }
