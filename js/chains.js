@@ -8,24 +8,27 @@ class Chain {
 
   _reset() {
     // number of letters in a chain
-    this._length = 4 + Math.floor(Math.random() * 8);
+    this._length = 4 + Math.floor(Math.random() * 4);
     // "time" offset, so not every letter changes at the same time
     this._offset = Math.random();
-    const max_duration = 5;
-    const duration_fraction = Math.floor(Math.random() * (max_duration - 1) + 1);
+    // the fall time is an integer fraction of the total animation time
+    const max_duration = 3;
+    this._duration_factor = Math.floor(Math.random() * max_duration + 1);
     // fall duration relative to total duration
-    this._duration = this._total_duration / duration_fraction;
+    this._duration = this._total_duration / this._duration_factor;
     // letter size
-    this._scl = duration_fraction / max_duration * 25 + 5;
+    this._scl = this._duration_factor / max_duration * 30 + 5;
     // random x and y starting positions
     this._x = Math.random() * this._canvas_size; // x coordinate never changes
     this._start_y = Math.random() * this._canvas_size;
     // total number of statuses
     this._total_statuses = Math.floor(Math.random() * 4 + 8);
     // period of the status change
-    this._status_period = this._total_duration / this._total_statuses / 4;
+    this._status_period = this._total_duration / this._total_statuses / 8;
     // current status
     this._status_counter = 0;
+    // color alpha
+    this._alpha = this._duration_factor / max_duration * 0.5 + 0.5;
   }
 
   // each status is a set of letters
@@ -34,6 +37,7 @@ class Chain {
     for (let i = 0; i < this._total_statuses; i++) {
       this._statuses.push(new Array(this._length));
       for (let j = 0; j < this._length; j++) {
+        // utf-8 value for kanji
         this._statuses[i][j] = String.fromCodePoint(0x3041 + Math.floor(Math.random() * 63));
       }
     }
@@ -42,7 +46,7 @@ class Chain {
   move(frame_count) {
     const percent = (frame_count % this._duration) / this._duration;
     // move down the chain
-    this._current_y = this._start_y + (this._canvas_size + this._scl * this._length) * percent;
+    this._current_y = this._start_y + (this._canvas_size + this._scl * this._length) * percent * this._duration_factor;
     while (this._current_y > this._canvas_size) this._current_y -= this._canvas_size + this._scl * this._length;
     // select current status
     this._status_counter = Math.floor(percent * this._total_statuses + this._offset) % this._total_statuses;
@@ -59,7 +63,7 @@ class Chain {
     ctx.font = `${scl}px Arial`;
     ctx.textAlign = "center";
     ctx.textBaseline = "top";
-    ctx.fillStyle = "#2bee15";
+    ctx.fillStyle = `rgba(43, 238, 21, ${this._alpha})`;//"#2bee15";
 
     this._statuses[this._status_counter].forEach((l, i) => {
       ctx.fillText(l, 0, scl * i);
