@@ -24,14 +24,10 @@ class Sketch extends Engine {
       console.log("%c Recording started", "color: green; font-size: 2rem");
     }
 
-    const current_frame = this.frameCount % 2 == 0 ? 0 : this._duration;
     this.ctx.save();
     this.background("#0f0f0f");
     this._chains.forEach((c) => {
-
-      if (this._juggle) c.move(current_frame);
-      else c.move(this.frameCount);
-
+      c.move(this.frameCount);
       c.show(this.ctx);
     });
     this.ctx.restore();
