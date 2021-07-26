@@ -26,7 +26,7 @@ class Sketch extends Engine {
 
     const current_frame = this.frameCount % 2 == 0 ? 0 : this._duration;
     this.ctx.save();
-    this.background("#151515");
+    this.background("#0f0f0f");
     this._chains.forEach((c) => {
 
       if (this._juggle) c.move(current_frame);
