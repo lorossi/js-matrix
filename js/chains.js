@@ -11,10 +11,12 @@ class Chain {
     this._length = 4 + Math.floor(Math.random() * 8);
     // "time" offset, so not every letter changes at the same time
     this._offset = Math.random();
+    const max_duration = 5;
+    const duration_fraction = Math.floor(Math.random() * (max_duration - 1) + 1);
     // fall duration relative to total duration
-    this._duration = this._total_duration / Math.floor(Math.random() * 3 + 1);
+    this._duration = this._total_duration / duration_fraction;
     // letter size
-    this._scl = Math.random() * 20 + 10;
+    this._scl = duration_fraction / max_duration * 25 + 5;
     // random x and y starting positions
     this._x = Math.random() * this._canvas_size; // x coordinate never changes
     this._start_y = Math.random() * this._canvas_size;

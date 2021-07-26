@@ -1,6 +1,6 @@
 class Sketch extends Engine {
   preload() {
-    this._chains_num = 200; // number of falling chains of letters
+    this._chains_num = 250; // number of falling chains of letters
     this._duration = 900; // animation duration
     this._recording = false;
   }
@@ -47,5 +47,9 @@ class Sketch extends Engine {
         console.log("%c Recording ended", "color: red; font-size: 2rem");
       }
     }
+  }
+
+  click() {
+    this.setup();
   }
 }
