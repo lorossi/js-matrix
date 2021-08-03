@@ -8,16 +8,14 @@ class Chain {
 
   _reset() {
     // number of letters in a chain
-    this._length = 4 + Math.floor(Math.random() * 4);
-    // "time" offset, so not every letter changes at the same time
-    this._offset = Math.random();
+    this._length = 5 + Math.floor(Math.random() * 5);
     // the fall time is an integer fraction of the total animation time
     const max_duration = 3;
     this._duration_factor = Math.floor(Math.random() * max_duration + 1);
     // fall duration relative to total duration
     this._duration = this._total_duration / this._duration_factor;
     // letter size
-    this._scl = this._duration_factor / max_duration * 30 + 5;
+    this._scl = (this._duration_factor / max_duration * 30 + 5) * 0.8 + Math.random() * 0.4;
     // random x and y starting positions
     this._x = Math.random() * this._canvas_size; // x coordinate never changes
     this._start_y = Math.random() * this._canvas_size;
@@ -25,6 +23,8 @@ class Chain {
     this._total_statuses = Math.floor(Math.random() * 4 + 8);
     // period of the status change
     this._status_period = this._total_duration / this._total_statuses / 8;
+    // "time" offset, so not every letter changes at the same time
+    this._offset = Math.random() * this._total_statuses;
     // current status
     this._status_counter = 0;
     // color alpha
