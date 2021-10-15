@@ -28,7 +28,10 @@ class Chain {
     // current status
     this._status_counter = 0;
     // color alpha
-    this._alpha = this._duration_factor / max_duration * 0.5 + 0.5;
+    this._alpha = this._duration_factor / max_duration * 0.25 + 0.75;
+    // white flashing text
+    this._flash = [...new Array(10)].map(() => Math.round(Math.random() *  this._duration)).sort();
+    this._flash_frame = false;
   }
 
   // each status is a set of letters
@@ -50,6 +53,9 @@ class Chain {
     while (this._current_y > this._canvas_size) this._current_y -= this._canvas_size + this._scl * this._length;
     // select current status
     this._status_counter = Math.floor(percent * this._total_statuses + this._offset) % this._total_statuses;
+    // check if the first letter should flash
+    if (this._flash.includes(frame_count & this._duration))
+      this._flash_frame = true;
   }
 
   show(ctx) {
@@ -63,9 +69,16 @@ class Chain {
     ctx.font = `${scl}px Arial`;
     ctx.textAlign = "center";
     ctx.textBaseline = "top";
-    ctx.fillStyle = `rgba(43, 238, 21, ${this._alpha})`;//"#2bee15";
 
     this._statuses[this._status_counter].forEach((l, i) => {
+      const alpha = this._alpha / this._length * i;
+      if (this._flash_frame && i == this._length - 1) {
+        this._flash_frame = false;
+        ctx.fillStyle = "white";
+      } else {
+        ctx.fillStyle = `rgba(43, 238, 21, ${alpha})`; //"#2bee15";
+      }
+
       ctx.fillText(l, 0, scl * i);
     });
 
