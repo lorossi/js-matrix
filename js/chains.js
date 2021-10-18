@@ -8,7 +8,7 @@ class Chain {
 
   _reset() {
     // number of letters in a chain
-    this._length = 7 + Math.floor(Math.random() * 5);
+    this._length = 7 + Math.floor(Math.random() * 10);
     // the fall time is an integer fraction of the total animation time
     const max_duration = 4;
     this._duration_factor = Math.floor(Math.random() * max_duration + 1);
@@ -30,9 +30,10 @@ class Chain {
     // color alpha
     this._alpha = this._duration_factor / max_duration * 0.25 + 0.75;
     // white flashing text
-    this._flash = [...new Array(20)].map(() => Math.round(Math.random() * this._duration));
+    const flash_length = Math.floor(20 / this._duration_factor);
+    this._flash = [...new Array(flash_length)].map(() => Math.round(Math.random() * this._duration));
     this._flash_frame = false;
-    this._flash_duration = 2;
+    this._flash_duration = 4;
     this._flash_count = 0;
   }
 
