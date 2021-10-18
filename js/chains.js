@@ -8,14 +8,14 @@ class Chain {
 
   _reset() {
     // number of letters in a chain
-    this._length = 5 + Math.floor(Math.random() * 5);
+    this._length = 7 + Math.floor(Math.random() * 5);
     // the fall time is an integer fraction of the total animation time
-    const max_duration = 3;
+    const max_duration = 4;
     this._duration_factor = Math.floor(Math.random() * max_duration + 1);
     // fall duration relative to total duration
     this._duration = this._total_duration / this._duration_factor;
     // letter size
-    this._scl = (this._duration_factor / max_duration * 30 + 5) * 0.8 + Math.random() * 0.4;
+    this._scl = (this._duration_factor / max_duration * 40 + 10) * 0.8 + Math.random() * 0.4;
     // random x and y starting positions
     this._x = Math.random() * this._canvas_size; // x coordinate never changes
     this._start_y = Math.random() * this._canvas_size;
@@ -30,8 +30,10 @@ class Chain {
     // color alpha
     this._alpha = this._duration_factor / max_duration * 0.25 + 0.75;
     // white flashing text
-    this._flash = [...new Array(10)].map(() => Math.round(Math.random() *  this._duration)).sort();
+    this._flash = [...new Array(20)].map(() => Math.round(Math.random() * this._duration));
     this._flash_frame = false;
+    this._flash_duration = 2;
+    this._flash_count = 0;
   }
 
   // each status is a set of letters
@@ -54,8 +56,16 @@ class Chain {
     // select current status
     this._status_counter = Math.floor(percent * this._total_statuses + this._offset) % this._total_statuses;
     // check if the first letter should flash
-    if (this._flash.includes(frame_count & this._duration))
+    if (this._flash.includes(frame_count % this._duration)) {
+      this._flash_count = this._flash_duration
+    }
+
+    if (this._flash_count > 0) {
+      this._flash_count--;
       this._flash_frame = true;
+    } else {
+      this._flash_frame = false;
+    }
   }
 
   show(ctx) {
@@ -76,7 +86,7 @@ class Chain {
         this._flash_frame = false;
         ctx.fillStyle = "white";
       } else {
-        ctx.fillStyle = `rgba(43, 238, 21, ${alpha})`; //"#2bee15";
+        ctx.fillStyle = `rgba(102, 255, 0, ${alpha})`; // bright green
       }
 
       ctx.fillText(l, 0, scl * i);
