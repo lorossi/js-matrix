@@ -8,14 +8,15 @@ class Chain {
 
   _reset() {
     // number of letters in a chain
-    this._length = 7 + Math.floor(Math.random() * 10);
+    this._length = 5 + Math.floor(Math.random() * 10);
     // the fall time is an integer fraction of the total animation time
     const max_duration = 4;
-    this._duration_factor = Math.floor(Math.random() * max_duration + 1);
+    const min_duration = 2;
+    this._duration_factor = Math.floor(Math.random() * (max_duration - min_duration) + min_duration);
     // fall duration relative to total duration
     this._duration = this._total_duration / this._duration_factor;
     // letter size
-    this._scl = (this._duration_factor / max_duration * 40 + 10) * 0.8 + Math.random() * 0.4;
+    this._scl = (this._duration_factor / max_duration * 40 + 10) * 0.8 + Math.random() * 0.2;
     // random x and y starting positions
     this._x = Math.random() * this._canvas_size; // x coordinate never changes
     this._start_y = Math.random() * this._canvas_size;
@@ -30,10 +31,10 @@ class Chain {
     // color alpha
     this._alpha = this._duration_factor / max_duration * 0.25 + 0.75;
     // white flashing text
-    const flash_length = Math.floor(20 / this._duration_factor);
+    const flash_length = Math.floor(10 / this._duration_factor);
     this._flash = [...new Array(flash_length)].map(() => Math.round(Math.random() * this._duration));
     this._flash_frame = false;
-    this._flash_duration = 4;
+    this._flash_duration = 5;
     this._flash_count = 0;
   }
 
@@ -58,10 +59,8 @@ class Chain {
     this._status_counter = Math.floor(percent * this._total_statuses + this._offset) % this._total_statuses;
     // check if the first letter should flash
     if (this._flash.includes(frame_count % this._duration)) {
-      this._flash_count = this._flash_duration
-    }
-
-    if (this._flash_count > 0) {
+      this._flash_count = this._flash_duration;
+    } else if (this._flash_count > 0) {
       this._flash_count--;
       this._flash_frame = true;
     } else {
@@ -84,7 +83,6 @@ class Chain {
     this._statuses[this._status_counter].forEach((l, i) => {
       const alpha = this._alpha / this._length * i;
       if (this._flash_frame && i == this._length - 1) {
-        this._flash_frame = false;
         ctx.fillStyle = "white";
       } else {
         ctx.fillStyle = `rgba(102, 255, 0, ${alpha})`; // bright green
