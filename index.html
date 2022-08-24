@@ -1,32 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta name="description" content="Matrix" />
+    <meta charset="utf-8" />
+    <title>EXIT THE MATRIX</title>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="author" content="Lorenzo Rossi" />
+    <link rel="shortcut icon" href="favicon.ico" />
 
-<head>
-  <meta name="description" content="Matrix" />
-  <meta charset="utf-8">
-  <title>EXIT THE MATRIX</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="author" content="Lorenzo Rossi" />
-  <link rel="shortcut icon" href="favicon.ico" />
+    <link rel="stylesheet" href="css/vars.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link
+      rel="preload"
+      href="css/fonts/Roboto-Light.ttf"
+      as="font"
+      crossorigin
+    />
 
-  <link rel="stylesheet" href="css/vars.css">
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="preload" href="css/fonts/Roboto-Light.ttf" as="font" crossorigin>
+    <script src="js/CCapture.all.min.js"></script>
+    <script src="js/engine.js"></script>
+    <script src="js/chains.js"></script>
+    <script src="js/sketch.js"></script>
+  </head>
 
-  <script src="js/CCapture.all.min.js"></script>
-  <script src="js/engine.js"></script>
-  <script src="js/chains.js"></script>
-  <script src="js/sketch.js"></script>
-</head>
+  <body>
+    <div class="container">
+      <canvas id="sketch" width="1000" height="1000"> </canvas>
+    </div>
 
-<body>
-  <div class="container">
-    <canvas id="sketch" width="1000" height="1000">
-    </canvas>
-  </div>
-
-  <div class="footer"></div>
-</body>
-
+    <div class="footer">
+      <a href="https://github.com/lorossi/js-matrix">GitHub repo</a>
+      <p>Click to generate a new Matrix!</p>
+    </div>
+  </body>
 </html>

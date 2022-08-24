@@ -59,13 +59,16 @@ class Engine {
     this._fpsBuffer.unshift(1000 / diff);
     this._fpsBuffer = this._fpsBuffer.splice(0, 30);
     // calculate average fps
-    this._frameRate = this._fpsBuffer.reduce((a, b) => a + b, 0) / this._fpsBuffer.length;
+    this._frameRate =
+      this._fpsBuffer.reduce((a, b) => a + b, 0) / this._fpsBuffer.length;
   }
 
   calculatePressCoords(e) {
     // calculate size ratio
     const boundingBox = this._canvas.getBoundingClientRect();
-    const ratio = Math.min(boundingBox.width, boundingBox.height) / this._canvas.getAttribute("width");
+    const ratio =
+      Math.min(boundingBox.width, boundingBox.height) /
+      this._canvas.getAttribute("width");
     // calculate real mouse/touch position
     if (!e.touches) {
       // we're dealing with a mouse
@@ -110,7 +113,6 @@ class Engine {
 
   mousemove(e) {
     if (this._mouse_pressed) {
-
     }
   }
 
@@ -206,16 +208,16 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // mouse event listeners
-  canvas.addEventListener("click", e => s.click(e));
-  canvas.addEventListener("mousedown", e => s.mousedown(e));
-  canvas.addEventListener("mouseup", e => s.mouseup(e));
-  canvas.addEventListener("mousemove", e => s.mousemove(e));
+  canvas.addEventListener("click", (e) => s.click(e));
+  canvas.addEventListener("mousedown", (e) => s.mousedown(e));
+  canvas.addEventListener("mouseup", (e) => s.mouseup(e));
+  canvas.addEventListener("mousemove", (e) => s.mousemove(e));
   // touchscreen event listeners
-  canvas.addEventListener("touchstart", e => s.touchdown(e));
-  canvas.addEventListener("touchend", e => s.touchup(e));
-  canvas.addEventListener("touchmove", e => s.touchmove(e));
+  canvas.addEventListener("touchstart", (e) => s.touchdown(e));
+  canvas.addEventListener("touchend", (e) => s.touchup(e));
+  canvas.addEventListener("touchmove", (e) => s.touchmove(e));
   // keyboard event listeners
-  document.addEventListener("keydown", e => s.keydown(e));
+  document.addEventListener("keydown", (e) => s.keydown(e));
 });
 
 class Color {
@@ -264,8 +266,11 @@ class Color {
     const g = this._g / 255;
     const b = this._b / 255;
 
-    let max = Math.max(r, g, b), min = Math.min(r, g, b);
-    let h, s, l = (max + min) / 2;
+    let max = Math.max(r, g, b),
+      min = Math.min(r, g, b);
+    let h,
+      s,
+      l = (max + min) / 2;
 
     if (max == min) {
       h = s = 0; // achromatic
@@ -273,9 +278,15 @@ class Color {
       let d = max - min;
       s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
       switch (max) {
-        case r: h = (g - b) / d + (g < b ? 6 : 0); break;
-        case g: h = (b - r) / d + 2; break;
-        case b: h = (r - g) / d + 4; break;
+        case r:
+          h = (g - b) / d + (g < b ? 6 : 0);
+          break;
+        case g:
+          h = (b - r) / d + 2;
+          break;
+        case b:
+          h = (r - g) / d + 4;
+          break;
       }
       h /= 6;
     }
@@ -347,7 +358,9 @@ class Color {
   }
 
   get hex() {
-    return `#${this._toHex(this._r)}${this._toHex(this._g)}${this._toHex(this._a)}`;
+    return `#${this._toHex(this._r)}${this._toHex(this._g)}${this._toHex(
+      this._a
+    )}`;
   }
 
   get rgb() {

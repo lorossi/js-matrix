@@ -1,6 +1,6 @@
 class Sketch extends Engine {
   preload() {
-    this._chains_num = 125; // number of falling chains of letters
+    this._chains_num = 150; // number of falling chains of letters
     this._duration = 900; // animation duration
     this._recording = false;
   }
@@ -13,7 +13,7 @@ class Sketch extends Engine {
     // setup capturer
     if (this._recording) {
       this._capturer = new CCapture({
-        format: "png"
+        format: "png",
       });
       this._capturer_started = false;
     }
@@ -37,7 +37,7 @@ class Sketch extends Engine {
 
     // save frame
     if (this._recording) {
-      if (this.frameCount < this._duration) {
+      if (this.frameCount <= this._duration) {
         this._capturer.capture(this._canvas);
       } else {
         this._recording = false;

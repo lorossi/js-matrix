@@ -10,17 +10,18 @@
 }
 
 body {
- font-family: Roboto;
- font-size: var(--text-size);
- background-color: var(--background-color);
- color: var(--text-color);
+  font-family: Roboto;
+  font-size: var(--text-size);
+  background-color: var(--background-color);
+  color: var(--text-color);
 }
 
 a {
   user-select: none;
 }
 
-a:visited, a:active {
+a:visited,
+a:active {
   color: var(--visited-link-color);
 }
 
