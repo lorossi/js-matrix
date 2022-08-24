@@ -23,7 +23,6 @@ If you are still interested, visit [this link]() to try it on your own!
 
 ![gif-1](output/output.gif)
 
-
 ## Credits
 
 This project is distributed under Attribution 4.0 International (CC BY 4.0) license.
