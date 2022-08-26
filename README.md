@@ -10,7 +10,7 @@ Previously I had made a [bash version that could fit into a QR](https://github.c
 The letters are selected randomly from Unicode value 0x3041 to 0x3094, which corresponds to the [Hiragana Script](https://en.wikipedia.org/wiki/Hiragana_(Unicode_block)).
 I honestly have no idea where they do come from or where they are used but most of all I hope I did not create any swear word by accident *(I swear, the letters are picked at random!)*.
 
-If you want to see it, check out my [Instagram profile](https://instagram.com/lorossi97) or scroll down a bit for a low quality, choppy gif and some stills.
+If you want to see it, check out my [Instagram profile](https://www.instagram.com/p/ChrqGTQKRfL/) or scroll down a bit for a low quality, choppy gif and some stills.
 If you are still interested, visit [this link](https://lorossi.github.io/js-matrix/) to try it on your own!
 
 ## Rendered video
