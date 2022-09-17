@@ -11,7 +11,7 @@ The letters are selected randomly from Unicode value 0x3041 to 0x3094, which cor
 I honestly have no idea where they do come from or where they are used but most of all I hope I did not create any swear word by accident *(I swear, the letters are picked at random!)*.
 
 If you want to see it, check out my [Instagram profile](https://www.instagram.com/p/ChrqGTQKRfL/) or scroll down a bit for a low quality, choppy gif and some stills.
-If you are still interested, visit [this link](https://lorossi.github.io/js-matrix/) to try it on your own!
+If you are still interested, visit [this link](https://github.com/lorossi/js-matrix) to try it on your own!
 
 ## Rendered video
 
